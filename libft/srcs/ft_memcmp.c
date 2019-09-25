@@ -6,11 +6,12 @@
 /*   By: pgobeil- <pgobeil-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:01:29 by pgobeil-          #+#    #+#             */
-/*   Updated: 2019/05/23 21:01:36 by pgobeil-         ###   ########.fr       */
+/*   Updated: 2019/08/27 20:03:05 by pgobeil-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stddef.h>
 
 int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {

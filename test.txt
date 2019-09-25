@@ -1,1 +1,0 @@
-gcc -I minilibx_macos drawing.c ftos.c angle.c -L minilibx_macos -lmlx -framework OpenGL -framework Appkit -L libft -lft -I libft

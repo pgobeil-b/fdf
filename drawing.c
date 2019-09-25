@@ -6,7 +6,7 @@
 /*   By: pgobeil- <pgobeil-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 15:29:01 by pgobeil-          #+#    #+#             */
-/*   Updated: 2019/08/08 18:34:33 by pgobeil-         ###   ########.fr       */
+/*   Updated: 2019/09/07 15:07:03 by pgobeil-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,46 +14,95 @@
 #include "fdf.h"
 #include "minilibx_macos/mlx.h"
 
-int 	deal_key(int key, void *param, t_mlx *mlx)
+void	zoom_diff(t_mlx *mlx, int key)
+{
+	draw_stuff(mlx, 1);
+	mlx->grid.zoom += (33 - key) * 2;
+	draw_stuff(mlx, 0);
+}
+
+void	angle_switch(t_mlx *mlx, int key)
+{
+	draw_stuff(mlx, 1);
+	if (key == 43)
+		mlx->grid.t_z -= 5;
+	if (key == 47)
+		mlx->grid.t_z += 5;
+	if (key == 45)
+		mlx->grid.t_y -= 5;
+	if (key == 46)
+		mlx->grid.t_y += 5;
+	if (key == 9)
+		mlx->grid.t_x -= 5;
+	if (key == 11)
+		mlx->grid.t_x += 5;
+	draw_stuff(mlx, 0);
+}
+
+int		deal_key(int key, t_mlx *mlx)
 {
 	if (key == 53)
 		exit(0);
-	ft_putchar('x');
-	return(0);
+	if (key == 40 || key == 37)
+	{
+		draw_stuff(mlx, 1);
+		mlx->grid.zp = key == 37 ? mlx->grid.zp - 1 : mlx->grid.zp + 1;
+		draw_stuff(mlx, 0);
+	}
+	if (key == 31 || key == 35)
+		zoom_diff(mlx, key);
+	if (key == 123 || key == 124 || key == 125 || key == 126)
+		offset(mlx, key);
+	if (key == 43 || (key >= 45 && key <= 47) || key == 9 || key == 11)
+		angle_switch(mlx, key);
+	if (key == 257 || key == 258)
+	{
+		draw_stuff(mlx, 1);
+		if (mlx->grid.p == 0)
+			mlx->grid.p++;
+		else
+			mlx->grid.p--;
+		draw_stuff(mlx, 0);
+	}
+	return (0);
 }
 
-
-int		absolute_value(int x)
+t_grid	starting_proj(t_grid grid)
 {
-	if (x < 0)
-		x = -x;
-	return(x);
+	grid.zoom = ft_min_val(WIDTH / grid.xsize / 2, HEIGTH / grid.ysize / 2);
+	grid.x_off = 0;
+	grid.y_off = 0;
+	grid.t_x = 0;
+	grid.t_y = 0;
+	grid.t_z = 0;
+	grid.p = 0;
+	grid.zp = 0;
+	return (grid);
 }
 
-int		main()
+int		main(int argc, char **argv)
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
 	int		fd;
-	int		d;
 	char	*line;
 	t_slide *head;
 	t_grid	grid;
-	t_mlx	*mlx;
+	t_mlx	mlx;
 
-	mlx = (t_mlx *)malloc(sizeof(t_mlx));
 	line = NULL;
-	fd = open("maps/42.fdf", O_RDONLY);
+	fd = open(argv[1], O_RDONLY);
+	if (fd == 0 || argc != 2)
+		return (err_ret("Usage : ./fdf <path to map>"));
+	if (check_file(argv[1]) == 1)
+		return (err_ret("Unsupported map"));
 	head = list_slider(fd, line);
 	grid = create_2d_array(head, (list_size(head)));
-	mlx->mlx_ptr = mlx_init();
-	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, 1000, 1000, "popup");
-	mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 250, 250 ,0250250100, "enweille esti");
-	// draw_my_bresenham(input, input2, mlx);
-	draw_h_lines(mlx, grid);
-	draw_v_lines(mlx, grid);
-	mlx_key_hook(mlx->win_ptr, deal_key, (void *)mlx);
-	printf("%s\n", "icitte ?");
-	mlx_loop(mlx->mlx_ptr);
-	return(0);
+	grid = starting_proj(grid);
+	mlx.grid = grid;
+	mlx.mlx_ptr = mlx_init();
+	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, WIDTH, HEIGTH, "FIL DE FER");
+	show_guide(mlx.mlx_ptr, mlx.win_ptr);
+	draw_stuff(&mlx, 0);
+	mlx_key_hook(mlx.win_ptr, deal_key, (void *)&mlx);
+	mlx_loop(mlx.mlx_ptr);
+	return (0);
 }

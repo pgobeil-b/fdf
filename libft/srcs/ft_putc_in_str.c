@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_angle.c                                       :+:      :+:    :+:   */
+/*   ft_putc_in_str.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgobeil- <pgobeil-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/05 15:17:36 by pgobeil-          #+#    #+#             */
-/*   Updated: 2019/08/05 16:43:33 by pgobeil-         ###   ########.fr       */
+/*   Created: 2019/09/14 11:36:59 by pgobeil-          #+#    #+#             */
+/*   Updated: 2019/09/14 12:35:01 by pgobeil-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-#include "minilibx_macos/mlx.h"
-#include <stdio.h>
-#include <unistd.h>
+#include "libft.h"
 
-t_one_two	converter(t_one_two linero) 
+int		ft_putc_in_str(char *src, char c, int start, int len)
 {
-	t_xy		new_p;
-	float		conv_x;
-	float		conv_y;
-	float		dump_p1;
-	float		dump_p2;
+	int cool_len;
 
-	new_p.x1 = (float)row
-
-
-
+	cool_len = len;
+	while (len)
+	{
+		src[start] = c;
+		len--;
+		start++;
+	}
+	return (cool_len);
 }

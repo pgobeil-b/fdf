@@ -6,7 +6,7 @@
 /*   By: pgobeil- <pgobeil-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 19:58:26 by pgobeil-          #+#    #+#             */
-/*   Updated: 2019/07/11 10:52:12 by pgobeil-         ###   ########.fr       */
+/*   Updated: 2019/09/05 19:31:48 by pgobeil-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <stddef.h>
 # include "get_next_line.h"
 # define MCK(s, r)if((s) == NULL)return(r)
 
@@ -47,6 +48,10 @@ int					ft_isspace(int c);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_pow(int x, int y);
 int					ft_atoi(const char *str);
+int					ft_abs_val(int x);
+int					ft_max_val(int x, int y);
+int					ft_min_val(int x, int y);
+int					err_ret(char *str);
 char				*ft_itoa(int n);
 void				ft_swap(int *a, int *b);
 void				*ft_memset(void *b, int c, size_t len);
