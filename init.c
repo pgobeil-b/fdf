@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgobeil- <pgobeil-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgobeil- <pgobeil-@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 15:17:36 by pgobeil-          #+#    #+#             */
-/*   Updated: 2019/09/07 15:30:43 by pgobeil-         ###   ########.fr       */
+/*   Updated: 2019/11/06 23:26:22 by pgobeil-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	show_guide(void *mlx_ptr, void *win_ptr)
 
 void	offset(t_mlx *mlx, int key)
 {
-	draw_stuff(mlx, 1);
+	mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
 	if (key == 123)
 		mlx->grid.x_off -= 10;
 	if (key == 124)

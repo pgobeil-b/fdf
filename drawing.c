@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgobeil- <pgobeil-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgobeil- <pgobeil-@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 15:29:01 by pgobeil-          #+#    #+#             */
-/*   Updated: 2019/09/07 15:07:03 by pgobeil-         ###   ########.fr       */
+/*   Updated: 2019/11/06 23:25:58 by pgobeil-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 
 void	zoom_diff(t_mlx *mlx, int key)
 {
-	draw_stuff(mlx, 1);
+	mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
 	mlx->grid.zoom += (33 - key) * 2;
 	draw_stuff(mlx, 0);
 }
 
 void	angle_switch(t_mlx *mlx, int key)
 {
-	draw_stuff(mlx, 1);
+	mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
 	if (key == 43)
 		mlx->grid.t_z -= 5;
 	if (key == 47)
@@ -45,7 +45,7 @@ int		deal_key(int key, t_mlx *mlx)
 		exit(0);
 	if (key == 40 || key == 37)
 	{
-		draw_stuff(mlx, 1);
+		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
 		mlx->grid.zp = key == 37 ? mlx->grid.zp - 1 : mlx->grid.zp + 1;
 		draw_stuff(mlx, 0);
 	}
@@ -57,7 +57,7 @@ int		deal_key(int key, t_mlx *mlx)
 		angle_switch(mlx, key);
 	if (key == 257 || key == 258)
 	{
-		draw_stuff(mlx, 1);
+		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
 		if (mlx->grid.p == 0)
 			mlx->grid.p++;
 		else
