@@ -6,4 +6,4 @@ Wireframe generator
 3.  ./fdf maps/mars.fdf
 
 
-![Mars elevation data](https://imgur.com/zSDWEgc)
+![Mars elevation data](https://i.imgur.com/zSDWEgc.png)
